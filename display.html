@@ -1,0 +1,36 @@
+
+
+<div class="qtext">
+  <?php echo $questiontext; ?>
+</div>
+
+<div class="ablock clearfix">
+  <?
+    
+    if($inputmethod == 'schema' || $inputmethod == 'advschema')
+    {        
+        $advgates = 0;
+        
+        include 'scheditor.html';
+    }
+    else
+    {
+    ?>
+  
+  <div class="prompt">
+    <?php echo get_string('defaultfunction', 'qtype_boolean').' '; ?>
+  </div>
+  <div class="answer">
+    =&nbsp;&nbsp;<input type="text" class="<?php echo $class; ?>" <?php echo "$readonly $inputname $value"; ?> size="80"/>
+    <?php echo $feedbackimg; ?>
+  </div>
+  <?php 
+    }
+  if ($feedback)
+  {
+    echo '<div class="feedback">'.$feedback.'</div>';  
+  }
+  
+  ?>
+  <?php $this->print_question_submit_buttons($question, $state, $cmoptions, $options); ?>
+</div>

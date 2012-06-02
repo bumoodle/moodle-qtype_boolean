@@ -1,0 +1,54 @@
+    <!-- YUI --> 
+    <!--
+    <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/reset-fonts-grids/reset-fonts-grids.css" /> 
+    <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/assets/skins/sam/skin.css" /> 
+    -->
+     
+    <!-- InputEx CSS --> 
+    <link type='text/css' rel='stylesheet' href='<?php echo $CFG->wwwroot; ?>/scripts/inputex/css/inputEx.css' /> 
+     
+    <!-- YUI-accordion CSS --> 
+    <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot; ?>/scripts/accordionview/assets/skins/sam/accordionview.css" /> 
+     
+    <!-- WireIt CSS --> 
+    <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot; ?>/scripts/css/WireIt.css" /> 
+    <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot; ?>/scripts/css/WireItEditor.css" /> 
+     
+    <!-- YUI --> 
+
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/utilities/utilities.js"></script>
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/resize/resize-min.js"></script> 
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/layout/layout-min.js"></script> 
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/container/container-min.js"></script> 
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/button/button-min.js"></script> 
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/tabview/tabview-min.js"></script>
+    <!-- <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/yuiloader/yuiloader-min.js"></script>  -->
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/lib/yui/2.8.2/build/json/json-min.js"></script> 
+    <script src="<?php echo $CFG->wwwroot; ?>/scripts/accordionview/accordionview-min.js"  type='text/javascript'></script> 
+    
+    
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/scripts/sch/excanvas.js"></script> 
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/scripts/inputex/build/inputex-min.js"></script>
+     
+    <!-- WireIt --> 
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/scripts/sch/wireit.js"></script> 
+    
+    <!-- LogicGates wiring -->
+    <script type="text/javascript" src="<?php echo $CFG->wwwroot; ?>/scripts/sch/logicGates.js.php?target=<?php echo $target; ?>&advgates=<?php echo $advgates ?>"></script> 
+     
+    <div id="schema" style="width: 800px; height: 600px; margin: 30px;"> 
+ 
+        <div id="top"></div> 
+        <div id="left"></div>
+        <div id="right"><ul id="accordionView"><li></li><li></li><li></li></ul></div> 
+ 
+        <div id="center"></div> 
+    </div>
+        
+    <script>
+    
+        var restore_value = '<?php echo $innervalue; ?>';
+    
+    </script>
+
+    <input type="hidden" id="<?php echo $target; ?>" name="<?php echo $target; ?>" value='<?php echo $innervalue; ?>' />

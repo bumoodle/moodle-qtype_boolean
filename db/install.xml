@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB PATH="question/type/match/db" VERSION="20100721"
+	COMMENT="XMLDB file for Moodle question/type/match" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd">
+	<TABLES>
+		<TABLE NAME="question_boolean" COMMENT="Options for boolean logic questions">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"
+					UNSIGNED="true" SEQUENCE="true" NEXT="question" />
+				<FIELD NAME="question" TYPE="int" LENGTH="10" NOTNULL="true"
+					UNSIGNED="true" DEFAULT="0" SEQUENCE="false"
+					COMMENT="Foreign key references question.id." PREVIOUS="id" NEXT="answers" />
+				<FIELD NAME="answers" TYPE="char" LENGTH="255" NOTNULL="true"
+					SEQUENCE="false"
+					COMMENT="Redundant. Comma-separated list of question_answer ids. SELECT id FROM question_answers WHERE question = ? ORDER BY id."
+					PREVIOUS="question" NEXT="limitgates" />
+				<FIELD NAME="limitgates" TYPE="int" LENGTH="2" NOTNULL="true"
+					UNSIGNED="false" DEFAULT="0" SEQUENCE="false"
+					COMMENT="Whether the amount of gates used is limited." PREVIOUS="answers"
+					NEXT="gate_limit" />
+				<FIELD NAME="gate_limit" TYPE="int" LENGTH="2" NOTNULL="true"
+					UNSIGNED="false" DEFAULT="0" SEQUENCE="false"
+					COMMENT="The maximum amount of gates the answer can contain."
+					PREVIOUS="limitgates" NEXT="freeinverters" />
+				<FIELD NAME="freeinverters" TYPE="int" LENGTH="1" NOTNULL="false"
+					UNSIGNED="false" SEQUENCE="false" PREVIOUS="gate_limit" NEXT="answerform" />
+				<FIELD NAME="answerform" TYPE="text" LENGTH="small" NOTNULL="false"
+					SEQUENCE="false" COMMENT="The required form for the answer; theoretically can be 
+					strict loose truth table k-map sop pos, etc." PREVIOUS="freeinverters" />
+			</FIELDS>
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="question" />
+				<KEY NAME="question" TYPE="foreign" FIELDS="question" REFTABLE="question"
+					REFFIELDS="id" PREVIOUS="primary" />
+			</KEYS>
+		</TABLE>
+	</TABLES>
+</XMLDB>
