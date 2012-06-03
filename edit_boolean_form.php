@@ -21,7 +21,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * shortanswer editing form definition.
  */
-class question_edit_boolean_form extends question_edit_form 
+class qtype_boolean_edit_form extends question_edit_form 
 {
     
     
@@ -87,6 +87,9 @@ class question_edit_boolean_form extends question_edit_form
         
         //allow more than one boolean expression as an answer
         $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_boolean', '{no}'), $creategrades->gradeoptions, 2, 2);
+
+        //add settings for multiple-try modes
+        $this->add_interactive_settings();
     }
 
     function data_preprocessing($question) 

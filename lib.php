@@ -24,8 +24,8 @@
  * @author Dongsheng Cai <dongsheng@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function qtype_shortanswer_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload) {
+function qtype_boolean_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload) {
     global $DB, $CFG;
     require_once($CFG->libdir . '/questionlib.php');
-    question_pluginfile($course, $context, 'qtype_shortanswer', $filearea, $args, $forcedownload);
+    question_pluginfile($course, $context, 'qtype_boolean', $filearea, $args, $forcedownload);
 }

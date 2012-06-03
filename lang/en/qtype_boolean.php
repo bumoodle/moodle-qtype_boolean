@@ -31,18 +31,20 @@ $string['answermustbegiven'] = 'You must enter an answer if there is a grade or 
 $string['answerno'] = 'Graded Expression {$a}';
 $string['editingboolean'] = 'Editing a Boolean Logic question';
 $string['filloutoneanswer'] = 'You must provide at least one possible expression. Expressions left blank will not be used. The first matching expression will be used to determine the score and feedback.';
-$string['boolean'] = 'Boolean Logic';
+$string['boolean'] = 'Boolean Expression';
+$string['pluginname'] = 'Boolean Expression';
 $string['boolean_help'] = 'In response to a question (that may include a image) the respondent constructs a boolean expression. There may be a several model expressions, each with a different grade. ';
 $string['boolean_link'] = 'question/type/shortanswer';
 $string['booleansummary'] = 'Allows a response of a simple boolean expression, which is graded by comparing form and function to several model expressions.';
 
-$string['defaultfunction'] = 'Expression';
+$string['defaultfunction'] = 'Expression:';
+$string['function'] = 'Expression: {$a}';
 $string['limitgates'] = 'Gate usage';
 $string['limitgatesstart'] = 'Limit the user to no more than&nbsp;&nbsp;';
 $string['limitgatesend'] = '&nbsp;&nbsp;gates.';
 
-$string['invalidexpression'] = '<strong>The system was unable to interpet your expression</strong>. Please use one of the standard formats discussed in class.';
-$string['invalidschematic'] = '<strong>The system was unable to interpet your schematic.</strong>. Check your schematic and try again.';
+$string['invalidexpression'] = '<strong>The system was unable to interpet your expression.</strong><br/> Please use one of the standard formats discussed in class.';
+$string['invalidschematic'] = '<strong>The system was unable to interpet your schematic.</strong><br/> Check your schematic and try again.';
 
 $string['booleanoptions'] = 'Limits and Interpretation';
 

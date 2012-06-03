@@ -39,9 +39,14 @@ class LogicSchematic
             //basic gates
             'AND' => (object)array_merge($gate_defaults, array('infix' => '*')),
             'OR' => (object)array_merge($gate_defaults, array('infix' => '+')),
-            'NOT' => (object)array_merge($gate_defaults, array('in' => 1, 'prefix' => '!'))
+            'NOT' => (object)array_merge($gate_defaults, array('in' => 1, 'prefix' => '!')),
             
             //advanced gates
+            'XOR' => (object)array_merge($gate_defaults, array('infix' => '^')),
+            'XNOR' => (object)array_merge($gate_defaults, array('prefix' => '!', 'infix' => '^')),
+            'NAND' => (object)array_merge($gate_defaults, array('prefix' => '!', 'infix' => '*')),
+            'NOR' => (object)array_merge($gate_defaults, array('prefix' => '!', 'infix' => '+')),
+
         );
         
         //run some basic sanity checks

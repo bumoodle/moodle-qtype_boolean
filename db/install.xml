@@ -25,8 +25,8 @@
 				<FIELD NAME="freeinverters" TYPE="int" LENGTH="1" NOTNULL="false"
 					UNSIGNED="false" SEQUENCE="false" PREVIOUS="gate_limit" NEXT="answerform" />
 				<FIELD NAME="answerform" TYPE="text" LENGTH="small" NOTNULL="false"
-					SEQUENCE="false" COMMENT="The required form for the answer; theoretically can be 
-					strict loose truth table k-map sop pos, etc." PREVIOUS="freeinverters" />
+					SEQUENCE="false" COMMENT="The required form for the answer; theoretically can be strict loose sop pos, etc." PREVIOUS="freeinverters" NEXT="inputmethod" />
+            <FIELD NAME="inputmethod" COMMENT="Input method for the answer" PREVIOUS="answerform" />
 			</FIELDS>
 			<KEYS>
 				<KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="question" />

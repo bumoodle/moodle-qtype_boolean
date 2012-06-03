@@ -1,0 +1,32 @@
+.que.boolean .answer {
+    padding: 0.3em;
+    width: auto;
+    display: inline;
+}
+
+.que.boolean .ablock
+{
+    font-style: italic;
+}
+
+
+.que.boolean .answer input {
+    width: 80%;
+}
+
+.codeinput
+{
+    font-family: monospace;
+}
+
+#schema
+{
+    width: auto !important;
+    height: 600px !important;
+}
+
+#top
+{
+    display: none;
+}  
+
