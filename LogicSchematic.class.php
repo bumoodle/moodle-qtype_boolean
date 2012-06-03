@@ -186,7 +186,7 @@ class LogicSchematic
         $schema = json_decode($json_string);
         
         //test for bad schematic
-        if($schema === false)
+        if($schema == false)
             throw new InvalidSchematicException('Did not receive a valid schematic response.');
             
         //create a new schematic from the list of modules (gates) and wires

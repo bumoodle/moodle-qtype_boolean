@@ -290,13 +290,12 @@ function load_wiring()
 function wiring_init() 
 { 
     window.editor = new WireIt.WiringEditor(logicGatesLang);     
-    load_wiring();
+
+    if(window.restore_value != "")
+        load_wiring();
 
     
     //save every .5s    
     setInterval("save_wiring()", 500); //auto-save every .5 seconds
-    
-    
 }
 
-//when ready, initialize the editor
