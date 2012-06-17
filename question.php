@@ -64,15 +64,25 @@ class qtype_boolean_question extends qtype_shortanswer_question implements quest
     public $gate_limit;
     public $freeinverters;
 
+    /**
+     * Returns true iff the active question is a schematic question (e.g. has a schematic entry mode selected.)
+     */
     function is_schematic()
     {
         return ($this->inputmethod == qtype_boolean_input_method::METHOD_SCHEMATIC || $this-> inputmethod == qtype_boolean_input_method::METHOD_ADVANCED_SCHEMATIC);
     }
 
+    /**
+     * Returns true iff the given response is gradeable.
+     * 
+     * @param array $response   The HTML response data.
+     * @return bool             True iff the response is gradeable.
+     */
     function is_complete_response(array $response)
     {
         try
         {
+            //if this is a schematic, attempt to parse the schematic using JSON
             if($this->is_schematic())
             {
                 $schema = LogicSchematic::from_JSON($response['answer']);
@@ -91,6 +101,30 @@ class qtype_boolean_question extends qtype_shortanswer_question implements quest
         {
             return false;
         }
+
+    }
+
+    function summarise_response(array $response)
+    {
+        try
+        {
+            //if this is a schematic, attempt to parse the schematic using JSON
+            if($this->is_schematic())
+            {
+                $schema = LogicSchematic::from_JSON($response['answer']);
+                return $schema->to_expression(false);                
+            }
+            else
+            {
+                return $response['answer'];
+            }
+
+        }
+        catch(Exception $e)
+        {
+            return $response['answer'];
+        }
+
 
     }
 
