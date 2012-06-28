@@ -176,6 +176,7 @@ class qtype_boolean_renderer extends qtype_renderer
                 'id' => $inputname,
                 'size' => 80,
                 'class' => 'codeinput ',
+                'style' => 'font-family: monospace' //legacy
             );
 
         //if this question is in a read-only mode, do not allow modifications 

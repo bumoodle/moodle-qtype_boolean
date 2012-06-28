@@ -917,7 +917,7 @@ class ShapedLogicExpression extends LogicExpression
         
         //special case: we have a constant
         if(!is_array($tree))
-            return false;
+            return true;
         
         //special case: just second-tier items
         //we allow these, as cannonically, ab is considered SOP and a+b is considered POS 
