@@ -13,11 +13,12 @@
  *      
  *      Production Changelog:
  *      
+ *       6/28/12 - Production changelog is now handled by git.
  *       6/27/11 - Fixed an issue in which expressions of the form (a^b)^(c^d) were incorrectly identified as malformed.
  *               - Added XOR gates to the order of precedence, between AND and OR, allowing a more convenient psuedocannonical form. 
  *       6/15/11 - Fixed an issue in which XOR gates were not counted in total gate counts.
- *       6/09/11 - Itinitial Moodle commit.
- *       5/16/11 - Created for the IQ Questioning System.
+ *       6/09/11 - Initial Moodle commit.
+ *       5/16/10 - Created for the IQ Questioning System.
  *              
  */
 
@@ -329,6 +330,33 @@ class LogicExpression
         foreach($table as $row => $value)
             echo $row." | ".($value ? '1' : '0').'<br/>';
                 
+    }
+
+    public function print_pla($other_vars = array())
+    {
+
+        //sort each of the vars in alphabetical order
+        //TODO: Perhaps use the order in which they were input instead? Consider what's conventionally best here.
+        $keys = array_unique(array_merge($this->all_vars(), $other_vars));
+        sort($keys);
+
+        //print the input and output count
+        echo '.i '.count($keys).'<br />';
+        echo '.o 1 <br/>';
+        
+        //specify the variable names, and provide "F" as a default output name
+        echo '.ilb '.implode(' ', $keys).'<br />';
+        echo '.ob F<br />'; 
+
+        //get the truth table
+        $table = $this->truth_table($other_vars);
+
+        //print each row in the table
+        foreach($table as $row => $value)
+            echo $row.'  '.($value ? '1' : '0').'<br/>';
+
+        //print the end of the table
+        echo '.e';
     }
     
     /**

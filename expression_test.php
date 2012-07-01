@@ -58,7 +58,10 @@ if(isset($_POST['input2']))
 {
 	echo stripslashes($_POST['input2']);
 }
-?></textarea></td></tr></table>
+?>
+</textarea>
+
+</td></tr></table>
 	<br />
 
 	<input type="submit" value="Submit" />
@@ -142,7 +145,9 @@ if(!empty($input))
 	
 		
 		echo '</td></tr></table><br/><br/>';
-			
+
+        echo '<div style="float:left">';
+
 		echo "<b>Truth tables:</b><table cellpadding=\"10\"><tr><td><pre>";
 		
 		$a->print_truth_table($b->all_vars());
@@ -151,7 +156,24 @@ if(!empty($input))
 		
 		$b->print_truth_table($a->all_vars());
 		
-		echo '</pre></td></tr></table>';
+        echo '</pre></td></tr></table>';
+
+		echo '</td></tr></table><br/><br/>';
+
+        echo '</div><div style="float: left; padding-left: 30px;">';
+
+        echo "<b>ESPRESSO-style PLAs:</b><table cellpadding=\"10\"><tr><td><pre>";
+		
+		$a->print_pla($b->all_vars());
+		
+		echo '</pre></td><td><pre>';
+		
+		$b->print_pla($a->all_vars());
+		
+        echo '</pre></td></tr></table>';
+
+        echo '</div>';
+
 	}
 	catch(Exception $e)
 	{
