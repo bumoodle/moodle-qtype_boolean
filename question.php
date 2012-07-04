@@ -226,6 +226,16 @@ class qtype_boolean_question extends qtype_shortanswer_question implements quest
         }
         
     }
+
+    /**
+     * Override the cleanup behavior of the shortanswer question type.
+     * TODO: eventually remove double-parenthesis and etc?
+     */
+    public function clean_response($answer)
+    {
+        return $answer;
+    }
+
 }
 
 

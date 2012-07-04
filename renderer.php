@@ -264,14 +264,23 @@ class qtype_boolean_renderer extends qtype_renderer
                 $qa, 'question', 'answerfeedback', $answer->id);
     }
 
-    public function correct_response(question_attempt $qa) {
+    public function correct_response(question_attempt $qa) 
+    {
         $question = $qa->get_question();
 
         $answer = $question->get_matching_answer($question->get_correct_response());
-        if (!$answer) {
-            return '';
+
+        if (!$answer) 
+        {
+            //FIXME: avoid this, if possible
+            $response = $question->get_correct_response();
+            
+            if(is_array($response) && array_key_exists('answer', $response))
+                return get_string('correctansweris', 'qtype_boolean', s($response['answer']));
+            else
+                return '';
         }
 
-        return get_string('correctansweris', 'qtype_shortanswer', s($answer->answer));
+        return get_string('correctansweris', 'qtype_boolean', s($answer->answer));
     }
 }

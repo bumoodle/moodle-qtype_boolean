@@ -71,3 +71,5 @@ $string['inputmethod'] = 'Input Method';
 $string['exprinput'] = 'Boolean Algebraic Expression (e.g. \'a+b\')';
 $string['schemainput'] = 'Basic Gate Schematic';
 $string['advschemainput'] = 'Advanced Gate Schematic';
+
+$string['correctansweris'] = 'A sample correct answer is: <pre>{$a}</pre>';
