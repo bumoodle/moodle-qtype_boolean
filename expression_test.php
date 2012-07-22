@@ -179,9 +179,6 @@ if(!empty($input))
 	{
 		echo "Sorry, couldn't understand your input.";
         echo $e->getMessage();
-        echo '<pre>';
-        print_r($e);
-        echo '</pre>';
 	}
 }
 

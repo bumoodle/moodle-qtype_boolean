@@ -338,8 +338,25 @@ class LogicExpression
         
         //print each row in the table
         foreach($table as $row => $value)
-            echo $row." | ".($value ? '1' : '0').'<br/>';
+            echo self::format_truth_table_row($keys, $row)." | ".($value ? '1' : '0').'<br/>';
                 
+    }
+
+    /**
+     *  Pretty-prints a truth table row so its values are aligned with its keys.
+     */
+    protected static function format_truth_table_row($keys, $row)
+    {
+        $formatted = '';
+
+        //split the row into digits
+        $digits = str_split($row); 
+
+        //format each row, so they have the same spacing as their labels
+        foreach($digits as $i => $digit)
+            $formatted .= str_pad($digit, strlen($keys[$i]), ' ', STR_PAD_BOTH);
+
+        return $formatted;
     }
 
     public function print_pla($other_vars = array())
