@@ -88,7 +88,7 @@ if(!empty($input))
 		
 		$a = new LogicExpression($input);
 		$b = new LogicExpression($input2);
-		
+
 		if($a->equivalent_to($b))
 			echo '<font color="green">YES</font>';
 		else
@@ -175,10 +175,13 @@ if(!empty($input))
         echo '</div>';
 
 	}
-	catch(Exception $e)
+    catch(Exception $e)
 	{
 		echo "Sorry, couldn't understand your input.";
-		echo $e->getMessage();
+        echo $e->getMessage();
+        echo '<pre>';
+        print_r($e);
+        echo '</pre>';
 	}
 }
 

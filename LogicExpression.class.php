@@ -72,7 +72,10 @@ class LogicExpression
         //case 2: simple operand and tick
         $infix = preg_replace("|([A-Za-z])'|", "~$1", $infix);
 
-        //case 3: parenthetical operand and tick
+        //case 3: subcript operand and tick
+        $infix = preg_replace("|([A-Za-z]\[[A-Za-z0-9]+\])'|", "~$1", $infix);
+
+        //case 4: parenthetical operand and tick
 
         //find any right-paren which is followed by a tick
         $pos = strrpos($infix, ")'");
@@ -125,7 +128,7 @@ class LogicExpression
     }
 
     /**
-     * Populates the internal RPN que from an infix expression string.
+     * Populates the internal RPN queue from an infix expression string.
      * 
      * $infix   string  The logic expression to parse.
      */
@@ -133,22 +136,18 @@ class LogicExpression
     {
         $infix = self::remove_whitespace($infix);
         
-
         //handle postfix ticks
         $infix = self::handle_tick($infix);
-
-        //$infix = preg_replace("|(\(.+?\))'|", "~$1", $infix);
-
 
         //clear the current expression and operator stack
         $this->rpn = array();
         $ops = array();
 
         //iterate through the array
-        $chars = preg_split('//', $infix, -1);
-        foreach($chars as $i => $char)
+        for($i = 0; $i < strlen($infix); ++$i)
         {
-            $orig_char = $char;
+            //get the character that we're working on
+            $char = $orig_char = substr($infix, $i, 1);
                 
             //push bools/variables directly into the output
             if(self::isBoolean($char) || !self::isOperator($char))
@@ -159,15 +158,21 @@ class LogicExpression
                 }
                 else
                 {
-
                     //if it's not a boolean or an operator, it is automatically
                     //considered a variable and is pushed to the output queue
                         
                     //skip invalid characters
                     if(!ctype_alpha($char))
                         continue;
-                        
-                    array_push($this->rpn, $char);
+
+                    //attempt to get the variable name, which may contain a subscript
+                    $var_name = self::get_variable_name(substr($infix, $i));
+
+                    //add the variable to our RPN expression
+                    array_push($this->rpn, $var_name);
+
+                    //and advance the count (the -1 is to counteract the ++$i)
+                    $i += strlen($var_name) - 1; 
                 }
 
                 //handle the case that we just completed the value for the unary NOT
@@ -177,13 +182,17 @@ class LogicExpression
 
                 
                 //handle implied AND (i.e. AB)
-                if($i + 1 >= count($chars) - 1)
+
+                //get the next character; we'll use this to determine if this case matches the implied AND
+                $next_char = substr($infix, $i + 1, 1);
+
+                //if we're at the end of the string, we can't have an implied AND
+                if($next_char === false)
                     continue;
-                
-                
+
                 //if the next character is another identifier, a literal, the unary not, or 
                 //an open paren '(', then we have an implied AND
-                if($chars[$i+1]=="(" || $chars[$i + 1] == '~' || $chars[$i + 1] == '!' || self::isBoolean($chars[$i+1]) || !self::isOperator($chars[$i+1]))
+                if($next_char == "(" || $next_char == '~' || $next_char == '!' || self::isBoolean($next_char) || !self::isOperator($next_char))
                     $char = '*';
                 else 
                     continue;
@@ -230,9 +239,10 @@ class LogicExpression
 
                 //if our close-paren is immediately followed by an open-paren
                 //non-operator, or unary not, this is a special case of the implied and
-                if($i < (count($chars) - 1))
+                $next_char = substr($infix, $i + 1, 1);
+                if($next_char !== false)
                 {
-                    if($chars[$i+1]=='(' || $chars[$i+1]=='~' || $chars[$i+1]=='!' || (!self::isOperator($chars[$i+1]) && ctype_alnum($chars[$i+1])))
+                    if($next_char == '(' || $next_char =='~' || $next_char =='!' || (!self::isOperator($next_char) && ctype_alnum($next_char)))
                         $char = '*';
                     else
                         continue;
@@ -408,6 +418,7 @@ class LogicExpression
      */
     public function evaluate($mapping)
     {
+
         //create a shallow copy of the RPN output
         $rpn = $this->rpn;
 
@@ -423,12 +434,14 @@ class LogicExpression
             //if we have a token
             if(!self::isOperator($bottom))
             {
-                
+
                 //evaluate it, push it onto the stack, and continue
                 if(!self::isBoolean($bottom))
                     array_push($stack, $mapping["$bottom"]);
                 else
                     array_push($stack, self::eval_bool($bottom));
+
+
                 continue;
                 
             }
@@ -439,6 +452,7 @@ class LogicExpression
                 if($bottom=='!' || $bottom=='~')
                 {
                     //if we don't have enough arguments on the stack,
+
                     //the expression was malformed
                     if(count($stack) < 1)
                         throw new InvalidArugumentException("Malformed expression!", 0);
@@ -666,6 +680,24 @@ class LogicExpression
     public static function remove_whitespace($string)
     {
         return trim(str_replace(array("\n", "\r", "\t", " ", "\o", "\xOB"), '', $string));
+    }
+
+    /**
+     * Helper function which deteremines the variable name of a variable, which may contain subscripts.
+     * Intended to parse a larger string, where the variable starts.
+     */
+    public static function get_variable_name($string)
+    {
+        //attempt to match a bus-notation substring
+        $count = preg_match("|^([A-Za-z]\[[0-9A-Za-z]+\])|", $string, $matches);
+
+        //if we didn't match, return the first character
+        if(!$count)
+            return substr($string, 0, 1);
+
+        //otherwise, return the matching substring
+        else
+            return $matches[1];
     }
     
 }
@@ -1039,4 +1071,5 @@ class ShapedLogicExpression extends LogicExpression
 
         return $max_depth;
     }
+
 }
