@@ -34,7 +34,7 @@ class qtype_boolean_edit_form extends question_edit_form
         
         //set up the per-option answers
         $repeated[] =& $mform->createElement('header', 'answerhdr', $label);
-        $repeated[] =& $mform->createElement('text', 'answer', get_string('defaultfunction', 'qtype_boolean'), array('size' => 80));
+        $repeated[] =& $mform->createElement('text', 'answer', get_string('defaultfunction', 'qtype_boolean'), array('size' => 80, style=>'font-family: monospace'));
         $repeated[] =& $mform->createElement('select', 'fraction', get_string('grade'), $gradeoptions);
         $repeated[] =& $mform->createElement('editor', 'feedback', get_string('feedback', 'quiz'),array('rows' => 5), $this->editoroptions);
         
