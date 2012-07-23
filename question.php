@@ -25,7 +25,7 @@
 
 
 defined('MOODLE_INTERNAL') || die();
-
+require_once($CFG->dirroot.'/question/type/shortanswer/questiontype.php');
 
 /**
  * Enumeration which describes how Boolean logic function should be entered by the user.
