@@ -657,10 +657,36 @@ class LogicExpression
      */
     public function logically_equivalent(LogicExpression $other)
     {       
+        //get a list of all variables in either function; these are used to populate the TT
         $this_vars = $this->all_vars();
         $other_vars = $other->all_vars();
         
         return $this->truth_table($other_vars) == $other->truth_table($this_vars);
+    }
+
+    public function is_logic_inverse_of(LogicExpression $other)
+    {
+        //get a list of all variables in either function; these are used to populate the TT
+        $this_vars = $this->all_vars();
+        $other_vars = $other->all_vars();
+      
+        //get the "truth table" view of each Boolean function
+        $this_truthtable = $this->truth_table($other_vars);
+        $other_truthtable = $other->truth_table($this_vars);
+
+        
+        //we know two functions are logical inverses if their fully resolved outputs are never equal
+        foreach($this_truthtable as $input => $this_output)
+        {
+
+            //if they are ever equal, they're not logic inverses
+            if($other_truthtable[$input] == $this_output)
+                return false;
+
+        }
+        
+        //otherwise, return true
+        return true;
     }
 
 

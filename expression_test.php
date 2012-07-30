@@ -106,7 +106,17 @@ if(!empty($input))
 		else
 			echo '<font color="red">NO</font>';
 			
-		echo '<tr><td>SOP?</td><td><strong>';
+
+
+        echo '</td></tr><tr><td>Inverses?</td><td><strong>';
+
+        if($a->is_logic_inverse_of($b))
+			echo '<font color="green">YES</font>';
+		else
+			echo '<font color="red">NO</font>';
+
+
+        echo '</td></tr><tr><td>SOP?</td><td><strong>';
 		
 		if($a->is_sum_of_products())
 			echo '<font color="green">YES</font>';
@@ -120,7 +130,7 @@ if(!empty($input))
 		else
 			echo '<font color="red">NO</font>';
 		
-		echo '<tr><td>POS?</td><td><strong>';
+		echo '</td></tr><tr><td>POS?</td><td><strong>';
 		
 			if($a->is_product_of_sums())
 			echo '<font color="green">YES</font>';
