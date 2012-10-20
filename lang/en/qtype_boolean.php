@@ -25,13 +25,16 @@
  * 
  */
 
-$string['addingboolean'] = 'Adding a Boolean Logic question';
+
+$string['pluginname'] = 'Boolean Expression';
+$string['pluginnameadding'] = 'Adding a Boolean Expression question';
+$string['pluginnameediting'] = 'Editing a Boolean Expression question';
+$string['pluginnamesummary'] = 'Allows a response of a simple boolean expression, which is graded by comparing form and function to several model expressions.';
+
 $string['addmoreanswerblanks'] = 'Blanks for {no} More Answers';
 $string['answermustbegiven'] = 'You must enter an answer if there is a grade or feedback.';
 $string['answerno'] = 'Graded Expression {$a}';
-$string['editingboolean'] = 'Editing a Boolean Logic question';
 $string['filloutoneanswer'] = 'You must provide at least one possible expression. Expressions left blank will not be used. The first matching expression will be used to determine the score and feedback.';
-$string['boolean'] = 'Boolean Expression';
 $string['pluginname'] = 'Boolean Expression';
 $string['boolean_help'] = 'In response to a question (that may include a image) the respondent constructs a boolean expression. There may be a several model expressions, each with a different grade. ';
 $string['boolean_link'] = 'question/type/shortanswer';
