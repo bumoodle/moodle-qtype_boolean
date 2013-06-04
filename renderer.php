@@ -93,31 +93,17 @@ class qtype_boolean_renderer extends qtype_renderer
 
         //extract the name and previous answer from the question's state
         $name = $qa->get_qt_field_name('answer'); 
-        $innervalue = $qa->get_last_qt_var('answer');
-
-        //require YUI modules
-        $PAGE->requires->yui2_lib('utilities');
-        $PAGE->requires->yui2_lib('resize');
-        $PAGE->requires->yui2_lib('layout');
-        $PAGE->requires->yui2_lib('container');
-        $PAGE->requires->yui2_lib('button');
-        $PAGE->requires->yui2_lib('tabview');
-        $PAGE->requires->yui2_lib('yuiloader');
-        $PAGE->requires->yui2_lib('json');
+        $innervalue = $qa->get_last_qt_var('answer', '');
 
         //WireIt and dependencies
-        $PAGE->requires->js($this->path().'/scripts/accordionview/accordionview-min.js');
+        $PAGE->requires->js($this->path().'/scripts/accordionview/accordionview.js');
         $PAGE->requires->js($this->path().'/scripts/sch/excanvas.js');
-        $PAGE->requires->js($this->path().'/scripts/inputex/build/inputex-min.js');
+        $PAGE->requires->js($this->path().'/scripts/inputex/build/inputex.js');
         $PAGE->requires->js($this->path().'/scripts/sch/wireit.js');
         $PAGE->requires->js($this->path().'/scripts/sch/logicGates.js.php?target='.$name.'&advgates='.$adv_gates);
 
-
-        //code to restore the previous schematic
-        $PAGE->requires->js_init_code('window.restore_value = \''.$innervalue.'\';');
-
         //initialization code
-        $PAGE->requires->js_init_code('wiring_init()', true);
+        $PAGE->requires->js_init_call('wiring_init', array($innervalue), true);
 
         //question text
         $result = html_writer::tag('div', $qa->get_question()->format_questiontext($qa), array('class' => 'qtext'));
